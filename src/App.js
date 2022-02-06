@@ -9,15 +9,17 @@ import MainDashboard from "./Pages/MainDashboard";
 import theme from "./Styling/DarkTheme";
 
 const rootElement = document.getElementById("root");
-render(
-  <BrowserRouter>
-  <ThemeProvider theme={theme}>
-    <Routes>
-      <Route path="/" element={<MainDashboard />} />
-    </Routes>
-    </ThemeProvider>
-  </BrowserRouter>,
-  rootElement
-);
+const App = () => {
+  render (
+    <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path="/" element={<MainDashboard />} />
+      </Routes>
+      </ThemeProvider>
+    </BrowserRouter>,
+    rootElement
+  );
+} 
 
 export default App;
