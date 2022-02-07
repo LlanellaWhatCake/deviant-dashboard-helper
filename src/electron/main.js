@@ -12,6 +12,7 @@ function createWindow() {
   });
 
   win.maximize();
+  
 
   // and load the index.html of the app.
   // win.loadFile("index.html");
@@ -45,3 +46,18 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+app.once('ready', () => {
+  const handleRedirect = (e, url) => {
+    console.log('ARE YOU HITTING THIS????');
+    e.preventDefault();
+    if (url !== e.sender.getURL()) {
+      
+      shell.openExternal(url);
+    }
+  }
+  const win = new BrowserWindow()
+  // Instead bare webContents:
+  win.webContents.on('will-navigate', handleRedirect)
+  // win.loadURL('http://google.com')
+})
