@@ -12,7 +12,14 @@ const theme = createTheme({
       },
       backgroundMain: {
         main: "#1e2125"
-      }
+      },
+      textMain: {
+          light: "#d2d2d2",
+          main: "#949494"
+      },
+    },
+    spaceBackground: {
+      src: "/Assets/dashboard_background_test.png"
     }
   });
 

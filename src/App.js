@@ -5,7 +5,7 @@ import {
   Route
 } from "react-router-dom";
 import { ThemeProvider } from '@material-ui/core';
-import MainDashboard from "./Pages/MainDashboard";
+import MainDashboardContainer from "./Components/MainDashboardContainer";
 import theme from "./Styling/DarkTheme";
 
 const rootElement = document.getElementById("root");
@@ -13,8 +13,9 @@ const App = () => {
   render (
     <BrowserRouter>
     <ThemeProvider theme={theme}>
+      <MainDashboardContainer />
       <Routes>
-        <Route path="/" element={<MainDashboard />} />
+        {/* <Route path="/" element={<MainDashboard />} /> */}
       </Routes>
       </ThemeProvider>
     </BrowserRouter>,
