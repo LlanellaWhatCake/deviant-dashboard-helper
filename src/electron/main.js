@@ -49,7 +49,6 @@ app.on('activate', () => {
 
 app.once('ready', () => {
   const handleRedirect = (e, url) => {
-    console.log('ARE YOU HITTING THIS????');
     e.preventDefault();
     if (url !== e.sender.getURL()) {
       

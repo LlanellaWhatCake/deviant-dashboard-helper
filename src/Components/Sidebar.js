@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Drawer from '@mui/material/Drawer';
 import theme from "../Styling/DarkTheme";
 import List from '@mui/material/List';
@@ -12,8 +12,14 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
 import Slider from '@mui/material/Slider';
 import NightlightIcon from '@mui/icons-material/Nightlight';
+import { StyleContext } from "../Contexts/StyleContext";
 
 const Sidebar = () => {
+
+    const [styleContext, setStyleContext] = useContext(StyleContext);
+    const [open, setOpen] = useState(true);
+    const smallSidebarWidth = 100;
+    const expandedSidebarWidth = 250;
 
     const styles = {
         icon: {
@@ -23,11 +29,17 @@ const Sidebar = () => {
         textSlider: {
             color: theme.palette.primary.main,
             width: "70%"
+        },
+        drawerContainer: {
+            backgroundColor: theme.palette.backgroundSecondary.main,
+            color: theme.palette.textMain.main,
+            width: open ? expandedSidebarWidth : smallSidebarWidth,
+            overflow: "hidden"
         }
     }
 
 
-    const [open, setOpen] = useState(false);
+    
     const openDrawer =
         <>
             <ListItem>
@@ -104,9 +116,21 @@ const Sidebar = () => {
         </>
         ;
 
-    const toggleDrawer = openClosed => {
-        setOpen(openClosed);
+    const toggleDrawer = open => {
+        setOpen(open);
+
+        if (open) {
+            setStyleContext({...styleContext, sidebarWidth: expandedSidebarWidth});
+        } else {
+            setStyleContext({...styleContext, sidebarWidth: smallSidebarWidth});
+        }
     }
+
+    useState(() => {
+        //default to open in context
+        setStyleContext({...styleContext, sidebarWidth: expandedSidebarWidth});
+    }, [])
+    
 
     return (
         <Drawer variant="permanent"
@@ -114,8 +138,7 @@ const Sidebar = () => {
             anchor="right"
             PaperProps={{
                 sx: {
-                    backgroundColor: theme.palette.backgroundSecondary.main,
-                    color: theme.palette.textMain.main
+                    ...styles.drawerContainer
                 }
             }}>
             <List>
