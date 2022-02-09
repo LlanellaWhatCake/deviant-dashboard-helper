@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import theme from "../Styling/DarkTheme";
 import AppHeader from "./AppHeader";
+import Sidebar from "./Sidebar";
 
 const style = {
     background: theme.palette.backgroundMain.main,
@@ -18,6 +19,7 @@ const MainDashboardContainer = () =>
   return (
       <div style={style}>
           <AppHeader />
+          <Sidebar />
           
       </div>
   );

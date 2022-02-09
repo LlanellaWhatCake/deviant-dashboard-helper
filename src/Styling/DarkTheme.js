@@ -17,6 +17,9 @@ const theme = createTheme({
           light: "#d2d2d2",
           main: "#949494"
       },
+      backgroundSecondary: {
+        main: "#282c30"
+      }
     },
     spaceBackground: {
       src: "/Assets/dashboard_background_test.png"
