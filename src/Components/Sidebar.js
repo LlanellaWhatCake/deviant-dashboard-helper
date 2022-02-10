@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import Drawer from '@mui/material/Drawer';
-// import theme from "../Styling/DarkTheme";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -14,6 +13,10 @@ import Slider from '@mui/material/Slider';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import { StyleContext } from "../Contexts/StyleContext";
 import Typography from '@mui/material/Typography';
+import Switch from '@mui/material/Switch';
+import darkTheme from '../Styling/DarkTheme';
+import lightTheme from '../Styling/LightTheme';
+import { THEME_OPTIONS } from '../StaticData/ThemeOptionsList';
 
 const Sidebar = () => {
 
@@ -25,11 +28,11 @@ const Sidebar = () => {
     const styles = {
         icon: {
             color: styleContext.theme.palette.primary.main,
-            fontSize: 40
+            fontSize: styleContext.theme.fontGeneralSize.size + 20
         },
         textSlider: {
             color: styleContext.theme.palette.primary.main,
-            width: "70%"
+            width: "150px"
         },
         drawerContainer: {
             backgroundColor: styleContext.theme.palette.backgroundSecondary.main,
@@ -39,6 +42,10 @@ const Sidebar = () => {
         },
         menuLabel: {
             fontSize: styleContext.theme.fontGeneralSize.size
+        },
+        switch: {
+            color: styleContext.theme.palette.primary.main,
+            width: "75px"
         }
     }
 
@@ -51,6 +58,16 @@ const Sidebar = () => {
                     size: newSize
                 }
             }});
+    }
+
+    const switchThemeMode = (isDark) => {
+        let name = isDark ? THEME_OPTIONS.dark : THEME_OPTIONS.light;
+        setStyleContext({
+            ...styleContext, 
+            theme: isDark ? darkTheme : lightTheme,
+            themeName: name
+        });
+
     }
 
 
@@ -89,12 +106,12 @@ const Sidebar = () => {
                 } />
             </ListItem>
             <Slider
-                defaultValue={30}
+                defaultValue={20}
                 valueLabelDisplay="auto"
-                step={10}
+                step={5}
                 marks
                 min={10}
-                max={50}
+                max={30}
                 sx={{
                     ...styles.textSlider
                 }}
@@ -119,6 +136,14 @@ const Sidebar = () => {
                     </Typography>
                 } />
             </ListItem>
+            <Switch checked={styleContext.themeName === THEME_OPTIONS.dark} 
+            onChange={({target: { checked }}) => {
+                console.log('target', checked, styleContext)
+                switchThemeMode(checked);
+            }}
+            sx={{
+                    ...styles.switch
+                }} />
 
         </>;
 

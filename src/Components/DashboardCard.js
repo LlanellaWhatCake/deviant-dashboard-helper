@@ -10,35 +10,36 @@ import CardActions from '@mui/material/CardActions';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 
-const styles = {
-    card: {
-        background: theme.palette.card.main,
-        width: 200,
-        height: 200,
-        margin: "10px"
-    },
-    icon: {
-        fontSize: 100
-    }
-}
-
-const DashboardBadge = styled(Badge)(( ) => ({
-    '& .MuiBadge-badge': {
-      right: 30,
-      top: 20,
-      padding: '0 4px',
-      height: 50,
-      background: theme.palette.primary.main,
-      fontSize: 20,
-      borderRadius: 40,
-      padding: "0 20px"
-    },
-  }));
  
 export const DashboardCard = ({ title, icon, notifications, iconColor }) =>
 {
     const [styleContext, setStyleContext] = useContext(StyleContext);
+    const styles = {
+        card: {
+            background: styleContext.theme.palette.card.main,
+            width: 200,
+            height: 200,
+            margin: "10px"
+        },
+        icon: {
+            fontSize: 100
+        }
+    }
     
+    const DashboardBadge = styled(Badge)(( ) => ({
+        '& .MuiBadge-badge': {
+          right: 30,
+          top: 20,
+          padding: '0 4px',
+          height: 50,
+          background: styleContext.theme.palette.primary.main,
+          fontSize: 20,
+          borderRadius: 40,
+          padding: "0 20px"
+        },
+      }));
+
+
 
   return (
       <>

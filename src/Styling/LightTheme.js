@@ -1,6 +1,6 @@
 import { createTheme } from '@material-ui/core/styles';
 
-const theme = createTheme({
+const lightTheme = createTheme({
     palette: {
       primary: {
         main: "#00c787",
@@ -14,11 +14,11 @@ const theme = createTheme({
         main: "#8d939c"
       },
       textMain: {
-          light: "#d2d2d2",
+          light: "#434950",
           main: "#3c4248"
       },
       backgroundSecondary: {
-        main: "#282c30"
+        main: "#9ba8b5"
       },
       card: {
         main: "linear-gradient(#353a40, #3f444b)"
@@ -29,7 +29,10 @@ const theme = createTheme({
     },
     dashboardIconSize: {
       size: 100
+    },
+    fontGeneralSize: {
+      size: 20
     }
   });
 
-  export default theme;
+  export default lightTheme;
