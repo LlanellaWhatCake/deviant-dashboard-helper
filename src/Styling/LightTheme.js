@@ -11,11 +11,11 @@ const theme = createTheme({
         dark: "#353a40"
       },
       backgroundMain: {
-        main: "#1e2125"
+        main: "#8d939c"
       },
       textMain: {
           light: "#d2d2d2",
-          main: "#949494"
+          main: "#3c4248"
       },
       backgroundSecondary: {
         main: "#282c30"
@@ -29,9 +29,6 @@ const theme = createTheme({
     },
     dashboardIconSize: {
       size: 100
-    },
-    fontGeneralSize: {
-      size: 20
     }
   });
 

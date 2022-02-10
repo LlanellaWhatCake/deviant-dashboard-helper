@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Drawer from '@mui/material/Drawer';
-import theme from "../Styling/DarkTheme";
+// import theme from "../Styling/DarkTheme";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -13,29 +13,44 @@ import TextFieldsIcon from '@mui/icons-material/TextFields';
 import Slider from '@mui/material/Slider';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import { StyleContext } from "../Contexts/StyleContext";
+import Typography from '@mui/material/Typography';
 
 const Sidebar = () => {
 
     const [styleContext, setStyleContext] = useContext(StyleContext);
     const [open, setOpen] = useState(true);
     const smallSidebarWidth = 100;
-    const expandedSidebarWidth = 250;
+    const expandedSidebarWidth = 350;
 
     const styles = {
         icon: {
-            color: theme.palette.primary.main,
+            color: styleContext.theme.palette.primary.main,
             fontSize: 40
         },
         textSlider: {
-            color: theme.palette.primary.main,
+            color: styleContext.theme.palette.primary.main,
             width: "70%"
         },
         drawerContainer: {
-            backgroundColor: theme.palette.backgroundSecondary.main,
-            color: theme.palette.textMain.main,
+            backgroundColor: styleContext.theme.palette.backgroundSecondary.main,
+            color: styleContext.theme.palette.textMain.light,
             width: open ? expandedSidebarWidth : smallSidebarWidth,
             overflow: "hidden"
+        },
+        menuLabel: {
+            fontSize: styleContext.theme.fontGeneralSize.size
         }
+    }
+
+    const changeFontSize = (newSize) => {
+        setStyleContext({...styleContext, 
+            theme: {
+                ...styleContext.theme,
+                fontGeneralSize: {
+                    ...styleContext.theme.fontGeneralSize,
+                    size: newSize
+                }
+            }});
     }
 
 
@@ -48,7 +63,13 @@ const Sidebar = () => {
                         <Avatar />
                     </ListItemIcon>
                 </ListItemButton>
-                <ListItemText primary="LlanellaWhatCake" />
+                <ListItemText primary={
+                    <Typography sx={{
+                        ...styles.menuLabel
+                    }}>
+                        LlanellaWhatCake
+                    </Typography>
+                } />
             </ListItem>
 
             <ListItem>
@@ -59,7 +80,13 @@ const Sidebar = () => {
                         }} />
                     </ListItemIcon>
                 </ListItemButton>
-                <ListItemText primary="Change Font size" />
+                <ListItemText primary={
+                    <Typography sx={{
+                        ...styles.menuLabel
+                    }}>
+                        Change Font Size
+                    </Typography>
+                } />
             </ListItem>
             <Slider
                 defaultValue={30}
@@ -67,10 +94,14 @@ const Sidebar = () => {
                 step={10}
                 marks
                 min={10}
-                max={70}
+                max={50}
                 sx={{
                     ...styles.textSlider
                 }}
+                onChange={({ target: { value }}) => {
+                    changeFontSize(value);
+                }}
+
             />
             <ListItem>
                 <ListItemButton>
@@ -80,7 +111,13 @@ const Sidebar = () => {
                         }} />
                     </ListItemIcon>
                 </ListItemButton>
-                <ListItemText primary="Toggle Light/Dark Mode" />
+                <ListItemText primary={
+                    <Typography sx={{
+                        ...styles.menuLabel
+                    }}>
+                        Toggle Light/Dark Mode
+                    </Typography>
+                } />
             </ListItem>
 
         </>;

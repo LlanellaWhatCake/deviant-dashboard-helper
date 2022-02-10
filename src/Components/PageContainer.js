@@ -1,13 +1,20 @@
 import React, { useContext } from 'react';
+import {
+    Routes,
+    Route
+  } from "react-router-dom";
 import ReactDOM from 'react-dom';
 import theme from "../Styling/DarkTheme";
 import Box from '@mui/material/Box';
 import { StyleContext } from "../Contexts/StyleContext";
+import DashboardFrontPage from '../Pages/DashboardFrontPage';
+
 
 const styles = {
     mainBox: {
         background: theme.palette.backgroundSecondary.main,
-        height: "100%"
+        height: "100%",
+        marginLeft: "25px"
     }
 }
  
@@ -19,9 +26,11 @@ export const PageContainer = () =>
   return (
       <Box sx={{
           ...styles.mainBox,
-          width: `calc(100% - ${styleContext.sidebarWidth + 30}px)`
+          width: `calc(100% - ${styleContext.sidebarWidth + 75}px)`
       }}>
-          Container!
+          <Routes>
+            <Route path="/" element={<DashboardFrontPage />} />
+          </Routes>
       </Box>
   );
 }

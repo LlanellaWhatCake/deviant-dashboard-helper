@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import theme from "../Styling/DarkTheme";
 import AppHeader from "./AppHeader";
 import Sidebar from "./Sidebar";
 import PageContainer from "./PageContainer";
+import { StyleContext } from "../Contexts/StyleContext";
 
-const style = {
-    background: theme.palette.backgroundMain.main,
-    backgroundImage: `url(${theme.spaceBackground.src})`,
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: "100%",
-    flex: 1
-}
  
-const MainDashboardContainer = () =>
-{
+const MainDashboardContainer = () => {
+
+    const [styleContext, setStyleContext] = useContext(StyleContext);
+    
+    const style = {
+        background: theme.palette.backgroundMain.main,
+        backgroundImage: `url(${theme.spaceBackground.src})`,
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        height: "100%",
+        flex: 1
+    }
+
   return (
       <div style={style}>
           <AppHeader />
