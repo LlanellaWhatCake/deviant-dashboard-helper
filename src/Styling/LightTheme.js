@@ -11,14 +11,14 @@ const lightTheme = createTheme({
         dark: "#353a40"
       },
       backgroundMain: {
-        main: "#8d939c"
+        main: "#fff"
       },
       textMain: {
           light: "#434950",
           main: "#3c4248"
       },
       backgroundSecondary: {
-        main: "#9ba8b5"
+        main: "#c7d9ea"
       },
       card: {
         main: "linear-gradient(#353a40, #3f444b)"

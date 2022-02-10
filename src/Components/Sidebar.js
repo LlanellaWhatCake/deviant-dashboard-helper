@@ -44,8 +44,7 @@ const Sidebar = () => {
             fontSize: styleContext.theme.fontGeneralSize.size
         },
         switch: {
-            color: styleContext.theme.palette.primary.main,
-            width: "75px"
+            color: styleContext.theme.palette.primary.main
         }
     }
 
