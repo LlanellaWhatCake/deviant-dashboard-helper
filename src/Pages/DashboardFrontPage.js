@@ -36,7 +36,12 @@ const DashboardFrontPage = () => {
         },
         link: {
             textDecoration: "none"
-        }
+        },
+        mainBox: {
+            background: styleContext.theme.palette.backgroundSecondary.main,
+            marginLeft: "25px",
+            padding: "20px 20px 20% 20px"
+          }
     }
 
     const iconSize = 100;
@@ -109,7 +114,11 @@ const DashboardFrontPage = () => {
         ];
 
     return (
-        <Container sx={{ ...style.mainContainer }} maxWidth={false}>
+        <Box sx={{
+            ...style.mainBox,
+            width: `calc(100% - ${styleContext.sidebarWidth + 125}px)`
+          }}>
+        <Container maxWidth={false}>
             <Typography sx={{ ...style.headerText }}>
                 My Notifications
             </Typography>
@@ -131,6 +140,7 @@ const DashboardFrontPage = () => {
             </Box>
             
         </Container>
+        </Box>
     );
 }
 

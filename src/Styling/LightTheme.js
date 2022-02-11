@@ -31,10 +31,10 @@ const lightTheme = createTheme({
       size: 100
     },
     fontSize: {
-      medium: 20,
-      small: 15,
-      large: 25,
-      extraLarge: 30
+      medium: 15,
+      small: 10,
+      large: 20,
+      extraLarge: 25
     }
   });
 

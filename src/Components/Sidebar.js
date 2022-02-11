@@ -28,7 +28,7 @@ const Sidebar = () => {
     const [styleContext, setStyleContext] = useContext(StyleContext);
     const [open, setOpen] = useState(true);
     const smallSidebarWidth = 100;
-    const expandedSidebarWidth = 350;
+    const expandedSidebarWidth = 300;
     const fontStep = 2;
     const defaultFontSize = 20;
 
