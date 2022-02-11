@@ -9,6 +9,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CardActions from '@mui/material/CardActions';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
+import { style } from '@mui/system';
 
  
 export const DashboardCard = ({ title, icon, notifications, iconColor }) =>
@@ -19,12 +20,21 @@ export const DashboardCard = ({ title, icon, notifications, iconColor }) =>
             background: styleContext.theme.palette.card.main,
             width: 200,
             height: 200,
-            margin: "10px"
+            margin: "15px",
+            color: styleContext.theme.palette.textMain.light,
+            '&:hover': {
+                boxShadow: `0px 0px 10px 10px ${styleContext.theme.palette.primary.main}`,
+                cursor: "pointer"
+             },
+             border: `1px solid ${styleContext.theme.palette.primary.main}`,
+             fontSize: styleContext.theme.fontSize.medium
         },
         icon: {
-            fontSize: 100
+            fontSize: 100,
+            color: styleContext.theme.palette.primary.main
         }
     }
+
     
     const DashboardBadge = styled(Badge)(( ) => ({
         '& .MuiBadge-badge': {
@@ -38,6 +48,7 @@ export const DashboardCard = ({ title, icon, notifications, iconColor }) =>
           padding: "0 20px"
         },
       }));
+
 
 
 

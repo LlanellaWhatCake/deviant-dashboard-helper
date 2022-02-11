@@ -18,10 +18,10 @@ const lightTheme = createTheme({
           main: "#3c4248"
       },
       backgroundSecondary: {
-        main: "#c7d9ea"
+        main: "#e0e3e7"
       },
       card: {
-        main: "linear-gradient(#353a40, #3f444b)"
+        main: "linear-gradient(#c6cace, #bbbfc3)"
       }
     },
     spaceBackground: {
@@ -30,8 +30,11 @@ const lightTheme = createTheme({
     dashboardIconSize: {
       size: 100
     },
-    fontGeneralSize: {
-      size: 20
+    fontSize: {
+      medium: 20,
+      small: 15,
+      large: 25,
+      extraLarge: 30
     }
   });
 

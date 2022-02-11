@@ -10,7 +10,7 @@ const AppHeader = () => {
             color: styleContext.theme.palette.textMain.light,
             display: "flex",
             flexDirection: "column",
-            fontSize: 30,
+            fontSize: 25,
             alignItems: "center",
             padding: 20
         },
@@ -22,6 +22,10 @@ const AppHeader = () => {
             alignItems: "center",
             padding: 10,
             boxShadow: `0px 0px 40px 40px ${styleContext.theme.palette.backgroundMain.main}`
+        },
+        subText: {
+            color: styleContext.theme.palette.textMain.main, 
+            fontSize: 15
         }
         
     }
@@ -30,10 +34,10 @@ const AppHeader = () => {
         <header style={{ ...styles.outerContainer }}>
             <div style={{...styles.header}}>
                 Deviant Dashboard Helper
-                <span style={{ color: styleContext.theme.palette.textMain.main, fontSize: 20 }}>
+                <span style={{ ...styles.subText }}>
                     Helper app made by <a href="https://www.deviantart.com/llanellawhatcake" target="_blank">LlanellaWhatCake</a>
                 </span>
-                <span style={{ color: styleContext.theme.palette.textMain.main, fontSize: 20 }}>
+                <span style={{ ...styles.subText }}>
                     This app is in no way endorsed by DeviantArt
                 </span>
             </div>

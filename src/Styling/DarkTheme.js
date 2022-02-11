@@ -30,8 +30,11 @@ const darkTheme = createTheme({
     dashboardIconSize: {
       size: 100
     },
-    fontGeneralSize: {
-      size: 20
+    fontSize: {
+      medium: 20,
+      small: 15,
+      large: 25,
+      extraLarge: 30
     }
   });
 

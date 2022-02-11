@@ -17,15 +17,15 @@ export const PageContainer = () =>
     const styles = {
         mainBox: {
             background: styleContext.theme.palette.backgroundSecondary.main,
-            height: "100%",
-            marginLeft: "25px"
+            marginLeft: "25px",
+            padding: "20px 20px 20% 20px"
         }
     }
 
   return (
       <Box sx={{
           ...styles.mainBox,
-          width: `calc(100% - ${styleContext.sidebarWidth + 75}px)`
+          width: `calc(100% - ${styleContext.sidebarWidth + 125}px)`
       }}>
           <Routes>
             <Route path="/" element={<DashboardFrontPage />} />

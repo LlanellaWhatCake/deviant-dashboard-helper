@@ -13,11 +13,14 @@ const MainDashboardContainer = () => {
     const style = {
         backgroundColor: styleContext.theme.palette.backgroundMain.main,
         backgroundImage: `url(${styleContext.theme.spaceBackground.src})`,
+        backgroundAttachment: "fixed",
         display: "flex",
         flexDirection: "column",
         width: "100%",
         height: "100%",
-        flex: 1
+        flex: 1,
+        position: "fixed",
+        overflow: "auto"
     }
 
   return (

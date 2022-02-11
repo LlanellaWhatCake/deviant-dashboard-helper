@@ -17,6 +17,7 @@ import Switch from '@mui/material/Switch';
 import darkTheme from '../Styling/DarkTheme';
 import lightTheme from '../Styling/LightTheme';
 import { THEME_OPTIONS } from '../StaticData/ThemeOptionsList';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const Sidebar = () => {
 
@@ -24,11 +25,13 @@ const Sidebar = () => {
     const [open, setOpen] = useState(true);
     const smallSidebarWidth = 100;
     const expandedSidebarWidth = 350;
+    const fontStep = 2;
+    const defaultFontSize = 20;
 
     const styles = {
         icon: {
             color: styleContext.theme.palette.primary.main,
-            fontSize: styleContext.theme.fontGeneralSize.size + 20
+            fontSize: styleContext.theme.fontSize.medium + 20
         },
         textSlider: {
             color: styleContext.theme.palette.primary.main,
@@ -41,7 +44,7 @@ const Sidebar = () => {
             overflow: "hidden"
         },
         menuLabel: {
-            fontSize: styleContext.theme.fontGeneralSize.size
+            fontSize: styleContext.theme.fontSize.medium
         },
         switch: {
             color: styleContext.theme.palette.primary.main
@@ -49,20 +52,25 @@ const Sidebar = () => {
     }
 
     const changeFontSize = (newSize) => {
-        setStyleContext({...styleContext, 
+        setStyleContext({
+            ...styleContext,
             theme: {
                 ...styleContext.theme,
-                fontGeneralSize: {
-                    ...styleContext.theme.fontGeneralSize,
-                    size: newSize
+                fontSize: {
+                    ...styleContext.theme.fontSize,
+                    medium: newSize,
+                    small: newSize - fontStep,
+                    large: newSize + fontStep,
+                    extraLarge: newSize + fontStep * 2
                 }
-            }});
+            }
+        });
     }
 
     const switchThemeMode = (isDark) => {
         let name = isDark ? THEME_OPTIONS.dark : THEME_OPTIONS.light;
         setStyleContext({
-            ...styleContext, 
+            ...styleContext,
             theme: isDark ? darkTheme : lightTheme,
             themeName: name
         });
@@ -70,7 +78,7 @@ const Sidebar = () => {
     }
 
 
-    
+
     const openDrawer =
         <>
             <ListItem>
@@ -97,34 +105,45 @@ const Sidebar = () => {
                     </ListItemIcon>
                 </ListItemButton>
                 <ListItemText primary={
-                    <Typography sx={{
-                        ...styles.menuLabel
-                    }}>
-                        Change Font Size
-                    </Typography>
-                } />
-            </ListItem>
-            <Slider
-                defaultValue={20}
-                valueLabelDisplay="auto"
-                step={5}
-                marks
-                min={10}
-                max={30}
-                sx={{
-                    ...styles.textSlider
-                }}
-                onChange={({ target: { value }}) => {
-                    changeFontSize(value);
-                }}
+                    <>
+                        <Typography sx={{
+                            ...styles.menuLabel
+                        }}>
+                            Change Font Size
+                        </Typography>
+                    </>}
+                    secondary={<>
+                        <Slider
+                            defaultValue={defaultFontSize}
+                            valueLabelDisplay="auto"
+                            step={fontStep}
+                            marks
+                            min={defaultFontSize - fontStep * 2}
+                            max={defaultFontSize + fontStep * 2}
+                            sx={{
+                                ...styles.textSlider
+                            }}
+                            onChange={({ target: { value } }) => {
+                                changeFontSize(value);
+                            }}
 
-            />
+                        />
+                    </>}
+                />
+            </ListItem>
+
             <ListItem>
                 <ListItemButton>
                     <ListItemIcon>
-                        <NightlightIcon sx={{
-                            ...styles.icon
-                        }} />
+                        {
+                            styleContext.themeName === THEME_OPTIONS.dark ? <NightlightIcon sx={{
+                                ...styles.icon
+                            }} /> :
+                            <LightModeIcon sx={{
+                                ...styles.icon
+                            }} />
+                        }
+                        
                     </ListItemIcon>
                 </ListItemButton>
                 <ListItemText primary={
@@ -133,16 +152,20 @@ const Sidebar = () => {
                     }}>
                         Toggle Light/Dark Mode
                     </Typography>
-                } />
+                }
+
+                    secondary={
+                        <Switch checked={styleContext.themeName === THEME_OPTIONS.dark}
+                            onChange={({ target: { checked } }) => {
+                                switchThemeMode(checked);
+                            }}
+                            sx={{
+                                ...styles.switch
+                            }} />
+                    }
+                />
             </ListItem>
-            <Switch checked={styleContext.themeName === THEME_OPTIONS.dark} 
-            onChange={({target: { checked }}) => {
-                console.log('target', checked, styleContext)
-                switchThemeMode(checked);
-            }}
-            sx={{
-                    ...styles.switch
-                }} />
+
 
         </>;
 
@@ -168,9 +191,14 @@ const Sidebar = () => {
             <ListItem>
                 <ListItemButton>
                     <ListItemIcon>
-                        <NightlightIcon sx={{
-                            ...styles.icon
-                        }} />
+                    {
+                            styleContext.themeName === THEME_OPTIONS.dark ? <NightlightIcon sx={{
+                                ...styles.icon
+                            }} /> :
+                            <LightModeIcon sx={{
+                                ...styles.icon
+                            }} />
+                        }
                     </ListItemIcon>
                 </ListItemButton>
             </ListItem>
@@ -181,17 +209,17 @@ const Sidebar = () => {
         setOpen(open);
 
         if (open) {
-            setStyleContext({...styleContext, sidebarWidth: expandedSidebarWidth});
+            setStyleContext({ ...styleContext, sidebarWidth: expandedSidebarWidth });
         } else {
-            setStyleContext({...styleContext, sidebarWidth: smallSidebarWidth});
+            setStyleContext({ ...styleContext, sidebarWidth: smallSidebarWidth });
         }
     }
 
     useState(() => {
         //default to open in context
-        setStyleContext({...styleContext, sidebarWidth: expandedSidebarWidth});
+        setStyleContext({ ...styleContext, sidebarWidth: expandedSidebarWidth });
     }, [])
-    
+
 
     return (
         <Drawer variant="permanent"
@@ -207,8 +235,8 @@ const Sidebar = () => {
                     <ListItemButton>
                         <ListItemIcon>
                             {open ? <ChevronRightIcon onClick={() => { toggleDrawer(false) }} sx={{
-                            ...styles.icon
-                        }} /> :
+                                ...styles.icon
+                            }} /> :
                                 <ChevronLeftIcon onClick={() => { toggleDrawer(true) }} sx={{
                                     ...styles.icon
                                 }} />}
