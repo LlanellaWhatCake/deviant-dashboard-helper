@@ -5,32 +5,35 @@ import Sidebar from "./Sidebar";
 import PageContainer from "./PageContainer";
 import { StyleContext } from "../Contexts/StyleContext";
 
- 
+
 const MainDashboardContainer = () => {
 
-    const [styleContext, setStyleContext] = useContext(StyleContext);
+  const [styleContext, setStyleContext] = useContext(StyleContext);
 
-    const style = {
-        backgroundColor: styleContext.theme.palette.backgroundMain.main,
-        backgroundImage: `url(${styleContext.theme.spaceBackground.src})`,
-        backgroundAttachment: "fixed",
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        height: "100%",
-        flex: 1,
-        position: "fixed",
-        overflow: "auto"
+  const style = {
+    mainContainer: {
+      backgroundColor: styleContext.theme.palette.backgroundMain.main,
+      backgroundImage: `url(${styleContext.theme.spaceBackground.src})`,
+      backgroundAttachment: "fixed",
+      display: "flex",
+      flexDirection: "column",
+      width: "100%",
+      height: "100%",
+      flex: 1,
+      position: "fixed",
+      overflow: "auto"
     }
 
+  }
+
   return (
-      <div style={{...style}}>
-          <AppHeader />
-          <Sidebar />
-            <PageContainer />
-          
-      </div>
+    <div style={{ ...style.mainContainer }}>
+      <AppHeader />
+      <Sidebar />
+      <PageContainer />
+
+    </div>
   );
 }
- 
+
 export default MainDashboardContainer;

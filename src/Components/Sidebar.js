@@ -18,6 +18,10 @@ import darkTheme from '../Styling/DarkTheme';
 import lightTheme from '../Styling/LightTheme';
 import { THEME_OPTIONS } from '../StaticData/ThemeOptionsList';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import HomeIcon from '@mui/icons-material/Home';
+import {
+    Link
+} from "react-router-dom";
 
 const Sidebar = () => {
 
@@ -98,6 +102,26 @@ const Sidebar = () => {
 
             <ListItem>
                 <ListItemButton>
+                    <Link to="/">
+                        <ListItemIcon>
+                            <HomeIcon sx={{
+                            ...styles.icon
+                        }}/>
+                        </ListItemIcon>
+                    </Link>
+
+                </ListItemButton>
+                <ListItemText primary={
+                    <Typography sx={{
+                        ...styles.menuLabel
+                    }}>
+                        Go Home
+                    </Typography>
+                } />
+            </ListItem>
+
+            <ListItem>
+                <ListItemButton>
                     <ListItemIcon>
                         <TextFieldsIcon sx={{
                             ...styles.icon
@@ -139,11 +163,11 @@ const Sidebar = () => {
                             styleContext.themeName === THEME_OPTIONS.dark ? <NightlightIcon sx={{
                                 ...styles.icon
                             }} /> :
-                            <LightModeIcon sx={{
-                                ...styles.icon
-                            }} />
+                                <LightModeIcon sx={{
+                                    ...styles.icon
+                                }} />
                         }
-                        
+
                     </ListItemIcon>
                 </ListItemButton>
                 <ListItemText primary={
@@ -181,6 +205,18 @@ const Sidebar = () => {
 
             <ListItem>
                 <ListItemButton>
+                <Link to="/">
+                    <ListItemIcon>
+                        <HomeIcon sx={{
+                            ...styles.icon
+                        }}/>
+                    </ListItemIcon>
+                    </Link>
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem>
+                <ListItemButton>
                     <ListItemIcon>
                         <TextFieldsIcon sx={{
                             ...styles.icon
@@ -191,13 +227,13 @@ const Sidebar = () => {
             <ListItem>
                 <ListItemButton>
                     <ListItemIcon>
-                    {
+                        {
                             styleContext.themeName === THEME_OPTIONS.dark ? <NightlightIcon sx={{
                                 ...styles.icon
                             }} /> :
-                            <LightModeIcon sx={{
-                                ...styles.icon
-                            }} />
+                                <LightModeIcon sx={{
+                                    ...styles.icon
+                                }} />
                         }
                     </ListItemIcon>
                 </ListItemButton>

@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {
+    useNavigate,
+    Link 
+  } from "react-router-dom";
 import DashboardCard from "../Components/DashboardCard";
 import { StyleContext } from "../Contexts/StyleContext";
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -15,6 +19,8 @@ import Container from '@mui/material/Container';
 
 const DashboardFrontPage = () => {
 
+    const [styleContext, setStyleContext] = useContext(StyleContext);
+
     const style = {
         mainContainer: {
             
@@ -25,7 +31,11 @@ const DashboardFrontPage = () => {
             justifyContent: "space-between"
         },
         headerText: {
-            fontSize: 20
+            fontSize: styleContext.theme.fontSize.large,
+            color: styleContext.theme.palette.textMain.main
+        },
+        link: {
+            textDecoration: "none"
         }
     }
 
@@ -35,7 +45,8 @@ const DashboardFrontPage = () => {
         {
             name: "Notifications",
             icon: <NotificationsIcon sx={{ fontSize: iconSize }} />,
-            iconColor: "primary"
+            iconColor: "primary",
+            link: "/notifications"
         },
         {
             name: "Deviants You Watch",
@@ -96,18 +107,21 @@ const DashboardFrontPage = () => {
                 iconColor: "primary"
             }
         ];
+
     return (
         <Container sx={{ ...style.mainContainer }} maxWidth={false}>
-            <Typography>
+            <Typography sx={{ ...style.headerText }}>
                 My Notifications
             </Typography>
             <Box sx={{ ...style.boxContainers}}>
             {myUpdates.map(option => {
-                return <DashboardCard title={option.name} icon={option.icon} iconColor={option.iconColor} />
+                return <Link to={option.link ? option.link : "/"} style={{ textDecoration: 'none' }}>
+                <DashboardCard title={option.name} icon={option.icon} iconColor={option.iconColor} />
+                </Link>
             })}
             </Box>
             
-            <Typography>
+            <Typography sx={{ ...style.headerText }}>
                 Explore
             </Typography>
             <Box sx={{ ...style.boxContainers}}>
