@@ -22,6 +22,9 @@ const darkTheme = createTheme({
       },
       card: {
         main: "linear-gradient(#353a40, #3f444b)"
+      },
+      backgroundThird: {
+        main: "#353a40"
       }
     },
     spaceBackground: {

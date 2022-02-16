@@ -21,8 +21,8 @@ const NotificationPage = () => {
     const [currentTab, setCurrentTab] = useState(firstTab);
     //test comment
 
-    const testNotifs = ["test", "hi", "testing", "oi", "lol", "test", "hi", "testing", 
-    "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol"];
+    const testNotifs = ["test", "hi", "testing", "oi", "lol", "test", "hi", "testing",
+        "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol"];
 
     const style = {
         mainContainer: {
@@ -73,25 +73,25 @@ const NotificationPage = () => {
 
     const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
         ({ theme }) => ({
-          textTransform: 'none',
-          fontWeight: theme.typography.fontWeightRegular,
-          fontSize: styleContext.theme.fontSize.medium,
-          top: "10px",
-          borderRadius: "15px 15px 0 0",
-          color: 'rgba(255, 255, 255, 0.7)',
-          margin: "0 0 0 7px",
-          backgroundColor: styleContext.theme.palette.backgroundSecondary.main,
-          '&.Mui-selected': {
-            color: '#fff',
-            backgroundColor: styleContext.theme.palette.primary.main,
-            boxShadow: `10px 0px 10px ${styleContext.theme.palette.primary.main}`,
-            top: 0
-          },
-          '&.Mui-focusVisible': {
-            backgroundColor: 'rgba(100, 95, 228, 0.32)',
-          },
+            textTransform: 'none',
+            fontWeight: theme.typography.fontWeightRegular,
+            fontSize: styleContext.theme.fontSize.medium,
+            top: "10px",
+            borderRadius: "15px 15px 0 0",
+            color: 'rgba(255, 255, 255, 0.7)',
+            margin: "0 0 0 7px",
+            backgroundColor: styleContext.theme.palette.backgroundSecondary.main,
+            '&.Mui-selected': {
+                color: '#fff',
+                backgroundColor: styleContext.theme.palette.primary.main,
+                boxShadow: `10px 0px 10px ${styleContext.theme.palette.primary.main}`,
+                top: 0
+            },
+            '&.Mui-focusVisible': {
+                backgroundColor: 'rgba(100, 95, 228, 0.32)',
+            },
         }),
-      );
+    );
 
 
     return (
@@ -99,11 +99,11 @@ const NotificationPage = () => {
             <Tabs value={currentTab} onChange={changeTab} >
                 {
                     NOTIFICATION_TABS.map(tab => {
-                        return <StyledTab label={<div style={{ ...style.tabInner}}>
-                        <Chip label="4" />
-                        {tab?.name}
+                        return <StyledTab label={<div style={{ ...style.tabInner }}>
+                            <Chip label="4" />
+                            {tab?.name}
                         </div>
-                            
+
 
                         } />
                     })
@@ -111,22 +111,29 @@ const NotificationPage = () => {
             </Tabs>
             <Box sx={{
                 ...style.mainBox,
-                width: `calc(100% - ${styleContext.sidebarWidth + 100}px)`
+                width: `calc(100% - ${styleContext.sidebarWidth + 75}px)`
             }}>
                 <NotificationMenuBar />
-                {
-                    NOTIFICATION_TABS.map(tab => {
-                        return <TabPanel index={tab?.index} value={currentTab}>
-                            Notifs for {tab?.name} section!
-                            {
-                                testNotifs.map(notif => {
-                                    return <Notification />;
-                                })
-                            }
-                            
-                        </TabPanel>
-                    })
-                }
+                <main>
+                    {
+                        NOTIFICATION_TABS.map(tab => {
+                            return <TabPanel index={tab?.index} value={currentTab}>
+                                Notifs for {tab?.name} section!
+                                {
+                                    testNotifs.map(notif => {
+                                        return <Notification 
+                                        username="testing"
+                                        notifSummary="testing commented on ABC"
+                                        notifDetails="This is a really cool thing.  I like the colors on ABC"
+                                        />;
+                                    })
+                                }
+
+                            </TabPanel>
+                        })
+                    }
+                </main>
+
 
             </Box>
 

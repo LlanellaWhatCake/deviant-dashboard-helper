@@ -13,15 +13,19 @@ import { TablePaginationActions } from './TablePaginationActions';
 
 
 export const NotificationMenuBar = () => {
+  const [styleContext, setStyleContext] = useContext(StyleContext);
 
-    const style = {
-        container: {
-            display: "flex",
-            justifyContent: "space-around"
-        }
+  const style = {
+    container: {
+      display: "flex",
+      justifyContent: "space-around"
+    },
+    pagination: {
+      color: styleContext.theme.palette.textMain.light
     }
-    const [styleContext, setStyleContext] = useContext(StyleContext);
-    const [page, setPage] = useState(1);
+  }
+
+  const [page, setPage] = useState(1);
 
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -33,31 +37,34 @@ export const NotificationMenuBar = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  
+
 
   return (
-    <Box sx={{ ...style.container }}>
-    <Button variant="contained"> 
+    <nav style={{ ...style.container }}>
+      <Button variant="contained">
         Select All
-    </Button>
+      </Button>
 
-    <Button variant="contained">
+      <Button variant="contained">
         Export Selected
-    </Button>
-        
-    <Button variant="contained">
+      </Button>
+
+      <Button variant="contained">
         Delete Selected
-    </Button>
-    <TablePagination 
-    component="div"
-    count={100}
-    page={1}
-    onPageChange={handleChangePage}
-    rowsPerPage={rowsPerPage}
-    onRowsPerPageChange={handleChangeRowsPerPage}
-    ActionsComponent={TablePaginationActions}
-    />
-    </Box>
+      </Button>
+      <TablePagination
+      sx={{
+        ...style.pagination
+      }}
+        component="div"
+        count={100}
+        page={1}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        ActionsComponent={TablePaginationActions}
+      />
+    </nav>
 
   );
 }

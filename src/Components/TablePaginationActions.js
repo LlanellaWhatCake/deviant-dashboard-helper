@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -17,9 +17,23 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TextField from '@mui/material/TextField';
 import InputBase from '@mui/material/InputBase';
+import { StyleContext } from "../Contexts/StyleContext";
 
 export const TablePaginationActions = (props) => {
-    const theme = useTheme();
+  const [styleContext, setStyleContext] = useContext(StyleContext);
+
+    const style = {
+      icons: {
+        color: styleContext.theme.palette.textMain.light
+      },
+      pageNumber: {
+        width: 20,
+        maxWidth: 50,
+        cursor: "pointer",
+        color: styleContext.theme.palette.textMain.light
+      }
+    }
+
     const { count, page, rowsPerPage, onPageChange } = props;
   
     const handleFirstPageButtonClick = (event) => {
@@ -44,44 +58,44 @@ export const TablePaginationActions = (props) => {
           onClick={handleFirstPageButtonClick}
           disabled={page === 0}
           aria-label="first page"
+          sx={{ 
+            ...style.icons
+          }}
         >
-          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+          {<FirstPageIcon />}
         </IconButton>
         <IconButton
           onClick={handleBackButtonClick}
           disabled={page === 0}
           aria-label="previous page"
+          sx={{ 
+            ...style.icons
+          }}
         >
-          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+          {<KeyboardArrowLeft />}
         </IconButton>
-        {/* <TextField disabled label={page} sx={{
-            height: 50,
-            width: 100
-
-        }}  /> */}
-        <InputBase
-        disabled
-        sx={{ 
-            width: 20,
-            maxWidth: 50,
-            cursor: "pointer"
-        }}
-        value={page}
-        
-      />
+        <span style={{ ...style.pageNumber}}>
+          {page}
+        </span>
         <IconButton
           onClick={handleNextButtonClick}
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
           aria-label="next page"
+          sx={{ 
+            ...style.icons
+          }}
         >
-          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+          {<KeyboardArrowRight />}
         </IconButton>
         <IconButton
           onClick={handleLastPageButtonClick}
           disabled={page >= Math.ceil(count / rowsPerPage) - 1}
           aria-label="last page"
+          sx={{ 
+            ...style.icons
+          }}
         >
-          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+          {<LastPageIcon />}
         </IconButton>
       </Box>
     );

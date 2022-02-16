@@ -116,7 +116,7 @@ const DashboardFrontPage = () => {
     return (
         <Box sx={{
             ...style.mainBox,
-            width: `calc(100% - ${styleContext.sidebarWidth + 125}px)`
+            width: `calc(100% - ${styleContext.sidebarWidth + 100}px)`
           }}>
         <Container maxWidth={false}>
             <Typography sx={{ ...style.headerText }}>

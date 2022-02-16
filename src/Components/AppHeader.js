@@ -10,7 +10,7 @@ const AppHeader = () => {
             color: styleContext.theme.palette.textMain.light,
             display: "flex",
             flexDirection: "column",
-            fontSize: 25,
+            fontSize: 15,
             alignItems: "center",
             padding: 20
         },
@@ -25,7 +25,7 @@ const AppHeader = () => {
         },
         subText: {
             color: styleContext.theme.palette.textMain.main, 
-            fontSize: 15
+            fontSize: 10
         }
         
     }

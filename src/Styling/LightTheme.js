@@ -22,6 +22,9 @@ const lightTheme = createTheme({
       },
       card: {
         main: "linear-gradient(#c6cace, #bbbfc3)"
+      },
+      backgroundThird: {
+        main: "#f0f0f0"
       }
     },
     spaceBackground: {
