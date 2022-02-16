@@ -19,6 +19,7 @@ const NotificationPage = () => {
 
     const [styleContext, setStyleContext] = useContext(StyleContext);
     const [currentTab, setCurrentTab] = useState(firstTab);
+    //test comment
 
     const testNotifs = ["test", "hi", "testing", "oi", "lol", "test", "hi", "testing", 
     "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol"];
