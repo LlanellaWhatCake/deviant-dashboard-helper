@@ -8,6 +8,8 @@ function createWindow() {
   const win = new BrowserWindow({
     webPreferences: {
       nodeIntegration: false,
+      worldSafeExecuteJavaScript: true, 
+      contextIsolation: true
     },
   });
 

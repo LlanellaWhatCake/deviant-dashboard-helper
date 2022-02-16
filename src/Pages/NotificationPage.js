@@ -9,6 +9,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
+import NotificationMenuBar from '../Components/NotificationMenuBar';
+import { Notification } from '../Components/Notification';
 
 
 const NotificationPage = () => {
@@ -17,6 +19,9 @@ const NotificationPage = () => {
 
     const [styleContext, setStyleContext] = useContext(StyleContext);
     const [currentTab, setCurrentTab] = useState(firstTab);
+
+    const testNotifs = ["test", "hi", "testing", "oi", "lol", "test", "hi", "testing", 
+    "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol"];
 
     const style = {
         mainContainer: {
@@ -33,7 +38,11 @@ const NotificationPage = () => {
         },
         mainBox: {
             background: styleContext.theme.palette.backgroundSecondary.main,
-            padding: "20px 20px 20% 20px"
+            padding: "20px 20px 20% 20px",
+            height: "100%"
+        },
+        tabInner: {
+            display: "flex"
         }
     }
 
@@ -89,10 +98,10 @@ const NotificationPage = () => {
             <Tabs value={currentTab} onChange={changeTab} >
                 {
                     NOTIFICATION_TABS.map(tab => {
-                        return <StyledTab label={<>
+                        return <StyledTab label={<div style={{ ...style.tabInner}}>
                         <Chip label="4" />
                         {tab?.name}
-                        </>
+                        </div>
                             
 
                         } />
@@ -103,10 +112,17 @@ const NotificationPage = () => {
                 ...style.mainBox,
                 width: `calc(100% - ${styleContext.sidebarWidth + 100}px)`
             }}>
+                <NotificationMenuBar />
                 {
                     NOTIFICATION_TABS.map(tab => {
                         return <TabPanel index={tab?.index} value={currentTab}>
                             Notifs for {tab?.name} section!
+                            {
+                                testNotifs.map(notif => {
+                                    return <Notification />;
+                                })
+                            }
+                            
                         </TabPanel>
                     })
                 }
