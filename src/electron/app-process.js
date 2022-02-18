@@ -4,11 +4,11 @@ const isDev = require('electron-is-dev');
 
 function createAppWindow() {
     // Create the browser window.
-    
+    console.log('hmmmmm', path.join(__dirname, 'preload.js'))
     const win = new BrowserWindow({
         webPreferences: {
             nodeIntegration: false,
-            preload: __dirname + '/preload.js',
+            preload: path.join(__dirname, 'preload.js'),
             // worldSafeExecuteJavaScript: true,
             contextIsolation: true,
             enableRemoteModule: true,

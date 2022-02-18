@@ -2,20 +2,42 @@ const {BrowserWindow} = require('electron');
 const authService = require('../Services/auth-service');
 const createAppWindow = require('../electron/app-process');
 const isDev = require('electron-is-dev');
+const path = require('path');
 
 let win = null;
 
 function createAuthWindow() {
   destroyAuthWin();
 
+  console.log('ok, creating auth window')
   win = new BrowserWindow({
-    width: 1000,
-    height: 600,
-    preload: __dirname + '/preload.js'
+    nodeIntegration: false,
+    preload: path.join(__dirname, 'preload.js'),
+    // worldSafeExecuteJavaScript: true,
+    contextIsolation: true,
+    enableRemoteModule: true,
   });
 
-  win.loadURL(authService.getAuthenticationURL()).catch(error => {
-      console.log('ERROR: ', error)
+  // win.maximize();
+
+  win.loadURL(authService.getAuthenticationURL()).then(res => {
+    let currentURL = win.webContents.getURL();
+    let urlPieces = currentURL.split('code=');
+    let code = urlPieces[1];
+  
+    console.log('were finished loading from dA', code);
+    authService.loadTokens('http://localhost:3000', code).then(() => {
+      console.log('did it', code);
+      createAppWindow();
+      destroyAuthWin();
+    }).catch(err => {
+      // console.log('ERROR', err)
+    });
+    
+    
+  }).catch(error => {
+      console.log('ERROR: ', error);
+      //later, load app anyway, you just can't access your stuff
   });
 
   if (isDev) {
@@ -31,6 +53,7 @@ function createAuthWindow() {
   };
 
   webRequest.onBeforeRequest(filter, async ({url}) => {
+    console.log('WEBREQUEST')
     await authService.loadTokens(url);
     createAppWindow();
     return destroyAuthWin();

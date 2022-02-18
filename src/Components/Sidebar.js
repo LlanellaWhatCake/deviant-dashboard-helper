@@ -202,7 +202,10 @@ const Sidebar = () => {
                             <LogoutIcon sx={{
                                 ...styles.icon
                             }} 
-                            onClick={() => ipcRenderer.send('logout')}
+                            onClick={() => {
+                                window.api.send('logout');
+                                window.api.send('toMain');
+                            }}
                             />
                         </ListItemIcon>
 
