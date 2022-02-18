@@ -22,6 +22,12 @@ import HomeIcon from '@mui/icons-material/Home';
 import {
     Link
 } from "react-router-dom";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { logoutUser } from '../Services/in-app-auth-service';
+
+// const ipcRenderer = window.ipcRenderer;
+console.log('you heifer', window, window.api)
+// window.api.send("toMain", "some data");
 
 const Sidebar = () => {
 
@@ -105,8 +111,8 @@ const Sidebar = () => {
                     <Link to="/">
                         <ListItemIcon>
                             <HomeIcon sx={{
-                            ...styles.icon
-                        }}/>
+                                ...styles.icon
+                            }} />
                         </ListItemIcon>
                     </Link>
 
@@ -190,6 +196,26 @@ const Sidebar = () => {
                 />
             </ListItem>
 
+            <ListItem>
+                <ListItemButton>
+                        <ListItemIcon>
+                            <LogoutIcon sx={{
+                                ...styles.icon
+                            }} 
+                            onClick={() => ipcRenderer.send('logout')}
+                            />
+                        </ListItemIcon>
+
+                </ListItemButton>
+                <ListItemText primary={
+                    <Typography sx={{
+                        ...styles.menuLabel
+                    }}>
+                        Logout
+                    </Typography>
+                } />
+            </ListItem>
+
 
         </>;
 
@@ -205,12 +231,12 @@ const Sidebar = () => {
 
             <ListItem>
                 <ListItemButton>
-                <Link to="/">
-                    <ListItemIcon>
-                        <HomeIcon sx={{
-                            ...styles.icon
-                        }}/>
-                    </ListItemIcon>
+                    <Link to="/">
+                        <ListItemIcon>
+                            <HomeIcon sx={{
+                                ...styles.icon
+                            }} />
+                        </ListItemIcon>
                     </Link>
                 </ListItemButton>
             </ListItem>
@@ -236,6 +262,18 @@ const Sidebar = () => {
                                 }} />
                         }
                     </ListItemIcon>
+                </ListItemButton>
+            </ListItem>
+            <ListItem>
+                <ListItemButton>
+                    <Link to="/">
+                        <ListItemIcon>
+                            <LogoutIcon sx={{
+                                ...styles.icon
+                            }} />
+                        </ListItemIcon>
+                    </Link>
+
                 </ListItemButton>
             </ListItem>
         </>

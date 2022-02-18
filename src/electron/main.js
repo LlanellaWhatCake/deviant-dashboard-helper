@@ -1,38 +1,20 @@
-const path = require('path');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const { createAuthWindow } = require('./auth-process');
+const createAppWindow = require('./app-process');
+const authService = require('../Services/auth-service');
 
-const { app, BrowserWindow } = require('electron');
-const isDev = require('electron-is-dev');
-
-function createWindow() {
-  // Create the browser window.
-  const win = new BrowserWindow({
-    webPreferences: {
-      nodeIntegration: false,
-      worldSafeExecuteJavaScript: true, 
-      contextIsolation: true
-    },
-  });
-
-  win.maximize();
-  
-
-  // and load the index.html of the app.
-  // win.loadFile("index.html");
-  win.loadURL(
-    isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
-  );
-  // Open the DevTools.
-  if (isDev) {
-    win.webContents.openDevTools({ mode: 'detach' });
+async function showWindow() {
+  try {
+    await authService.refreshTokens();
+    return createAppWindow();
+  } catch (err) {
+    createAuthWindow();
   }
 }
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(createWindow);
+app.whenReady().then(showWindow);
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -43,11 +25,15 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+ipcMain.on("toMain", (event, args) => {
+  console.log('got here!!!!!')
 });
+
+// app.on('activate', () => {
+//   if (BrowserWindow.getAllWindows().length === 0) {
+//     createAppWindow();
+//   }
+// });
 
 app.once('ready', () => {
   const handleRedirect = (e, url) => {
