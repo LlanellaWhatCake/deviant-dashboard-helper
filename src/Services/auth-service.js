@@ -73,7 +73,7 @@ async function refreshTokens() {
       accessToken = response.data.access_token;
       profile = jwtDecode(response.data.id_token);
     } catch (error) {
-      await logout();
+      // await logout();
 
       throw error;
     }
@@ -98,7 +98,6 @@ async function loadTokens(callbackURL, urlCode) {
     code: urlCode,
     redirect_uri: redirectUri
   };
-  console.log('like really??', exchangeOptions)
 
   const options = {
     method: "POST",
@@ -112,8 +111,6 @@ async function loadTokens(callbackURL, urlCode) {
 
   try {
     const response = await axios.post(`https://${auth0Domain}/token`, getAuthDataString());
-
-    console.log('TOKEN INFO: ', response)
 
     accessToken = response.data.access_token;
     // profile = jwtDecode(response.data.id_token);
