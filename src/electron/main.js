@@ -8,19 +8,6 @@ const acceptedUrls = [
 ];
 
 async function showWindow() {
-  // try {
-  //   await authService.refreshTokens().catch(err => {
-  //     console.log('in the catch');
-  //     createAuthWindow();
-  //   });
-  //   return createAppWindow();
-  // } catch (err) {
-  //   console.log('we caught the error in showWindow')
-  //   createAuthWindow();
-  // } finally { //you can still access the app, it just won't show anything from your account!
-  //   console.log('in the finally in showWindow')
-  // }
-
   try {
     await authService.refreshTokens().then(result => {
       return createAppWindow();
@@ -49,12 +36,6 @@ app.on('window-all-closed', () => {
 });
 
 
-// app.on('activate', () => {
-//   if (BrowserWindow.getAllWindows().length === 0) {
-//     createAppWindow();
-//   }
-// });
-
 app.once('ready', () => {
   const handleRedirect = (e, url) => {
     e.preventDefault();
@@ -66,5 +47,4 @@ app.once('ready', () => {
   const win = new BrowserWindow()
   // Instead bare webContents:
   win.webContents.on('will-navigate', handleRedirect)
-  // win.loadURL('http://google.com')
 })

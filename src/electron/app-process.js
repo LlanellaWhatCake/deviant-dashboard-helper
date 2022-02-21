@@ -2,6 +2,7 @@ const path = require('path');
 const { BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 const apiService = require('../Services/api-service');
+const authService = require('../Services/auth-service');
 
 function createAppWindow() {
     // Create the browser window.
