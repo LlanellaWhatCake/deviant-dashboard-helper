@@ -23,7 +23,6 @@ import {
     Link
 } from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
-import { logoutUser } from '../Services/in-app-auth-service';
 
 // const ipcRenderer = window.ipcRenderer;
 console.log('you heifer', window, window.api)
@@ -204,7 +203,6 @@ const Sidebar = () => {
                             }} 
                             onClick={() => {
                                 window.api.send('logout');
-                                window.api.send('toMain');
                             }}
                             />
                         </ListItemIcon>

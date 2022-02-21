@@ -121,7 +121,7 @@ async function loadTokens(callbackURL, urlCode) {
     }
     console.log('doing loadToken')
   } catch (error) {
-    console.log('OOPS! in loadTokens', error)
+    console.log('OOPS! in loadTokens', error);
     // await logout();
 
     throw error;

@@ -3,6 +3,10 @@ const { createAuthWindow } = require('./auth-process');
 const createAppWindow = require('./app-process');
 const authService = require('../Services/auth-service');
 
+const acceptedUrls = [
+  "www.deviantart.com"
+];
+
 async function showWindow() {
   // try {
   //   await authService.refreshTokens().catch(err => {
@@ -24,7 +28,7 @@ async function showWindow() {
       return createAuthWindow();
     })
   } catch (err) {
-    console.log('we caught the error in showWindow')
+    console.log('we caught the error in showWindow', err)
     // createAuthWindow();
   }
     
@@ -44,15 +48,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.on("toMain", (event, args) => {
-  console.log('got here!!!!!');
-  authService.logout().then(() => console.log("logged out successfully")).catch(err => console.log('error logging out', err));
-});
-
-ipcMain.on("logout", (event, args) => {
-  console.log('LOGOUT');
-  authService.logout().then(() => console.log("logged out successfully")).catch(err => console.log('error logging out', err));
-});
 
 // app.on('activate', () => {
 //   if (BrowserWindow.getAllWindows().length === 0) {
@@ -65,7 +60,7 @@ app.once('ready', () => {
     e.preventDefault();
     if (url !== e.sender.getURL()) {
       
-      shell.openExternal(url);
+      shell.openExternal(url); //make a list of accepted urls to go to for security reasons
     }
   }
   const win = new BrowserWindow()

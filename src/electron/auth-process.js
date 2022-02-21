@@ -20,24 +20,29 @@ function createAuthWindow() {
 
   // win.maximize();
 
+  console.log('where are we going', authService.getAuthenticationURL())
   win.loadURL(authService.getAuthenticationURL()).then(res => {
-    let currentURL = win.webContents.getURL();
-    console.log('url drom dA, I dont understand', currentURL);
-    let urlPieces = currentURL.split('code=');
-    let code = urlPieces[1];
+    let url = new URL(win.webContents.getURL());
+    let urlParamsObj = new URLSearchParams(url.search);
+    let code = urlParamsObj.get('code');
 
-    console.log('were finished loading from dA', code);
-    authService.loadTokens('http://localhost:3000', code).then(() => {
-      console.log('did it', code);
-      createAppWindow();
-      destroyAuthWin();
-    }).catch(err => {
-      // console.log('ERROR', err)
-    });
+
+    // console.log('WHAT IN THE WORLD', code, urlParamsObj.get('code'), urlParamsObj);
+
+    // if (code) {
+    //   console.log('were finished loading from dA', code);
+    //   authService.loadTokens('http://localhost:3000', code).then(() => {
+    //     console.log('did it', code);
+    //     createAppWindow();
+    //     destroyAuthWin();
+    //   }).catch(err => {
+    //     console.log('ERROR', err)
+    //   });
+    // }
 
 
   }).catch(error => {
-    // console.log('ERROR: ', error);
+    console.log('ERROR: ', error);
     //later, load app anyway, you just can't access your stuff
   });
 
@@ -54,19 +59,21 @@ function createAuthWindow() {
     let urlParamsObj = new URLSearchParams(url.search);
     let code = urlParamsObj.get('code');
 
-    console.log('WHAT IN THE WORLD', code, urlParamsObj.get('code'), urlParamsObj);
+    // console.log('WHAT IN THE WORLD', code, urlParamsObj.get('code'), urlParamsObj);
 
     // let currentURL = win.webContents.getURL();
     // let urlPieces = currentURL.split('code=');
     // let code = urlPieces[1];
 
+    if (code) {
     authService.loadTokens('http://localhost:3000', code).then(() => {
-            console.log('did it', code);
-            createAppWindow();
-            destroyAuthWin();
-          }).catch(err => {
-            // console.log('ERROR', err)
-          });
+      console.log('did it', code);
+      createAppWindow();
+      destroyAuthWin();
+    }).catch(err => {
+      // console.log('ERROR', err)
+    });
+  }
 
     console.log(newUrl, code);
     let oldUrl = win.webContents.getURL();

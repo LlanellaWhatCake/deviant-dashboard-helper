@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import ReactDOM from 'react-dom';
 import AppHeader from "./AppHeader";
 import Sidebar from "./Sidebar";
@@ -7,6 +7,14 @@ import { StyleContext } from "../Contexts/StyleContext";
 
 
 const MainDashboardContainer = () => {
+
+  //initially get the user's data at the start of the app, so messages, who they are logged in as, etc
+  useState(() => {
+    window.api.send("getMessages");
+    window.api.receive("getMessages", (messages) => {
+      console.log('got messages, here there are: ', messages);
+    })
+  }, []);
 
   const [styleContext, setStyleContext] = useContext(StyleContext);
 
