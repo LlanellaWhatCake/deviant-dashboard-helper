@@ -3,6 +3,7 @@ const { BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 const apiService = require('../Services/api-service');
 const authService = require('../Services/auth-service');
+const notificationService = require('../Services/notification-service');
 
 function createAppWindow() {
     // Create the browser window.
@@ -35,21 +36,28 @@ function createAppWindow() {
     /**
  * API CALLS
  */
-ipcMain.on("logout", (event, args) => {
-    console.log('LOGOUT');
-    authService.logout().then(() => console.log("logged out successfully")).catch(err => console.log('error logging out', err));
-  });
-  
-  ipcMain.on("getMessages", (event, args) => {
-        apiService.getMessages().then(data => {
-            console.log('got messages successfully!', data);
-            win.webContents.send('getMessages', data);
-        }).catch(error => {
-            console.log("error getting messages!");
-        });
-    
-    //eventually, y'know, user ipcMain to send the messages back to the renderer
-  });
+    ipcMain.on("logout", (event, args) => {
+        console.log('logging out...');
+        authService.logout().then(() => console.log("logged out successfully")).catch(err => console.log('error logging out', err));
+    });
+
+    ipcMain.on("getMessages", (event, args) => {
+        // apiService.getMessages().then(data => {
+        //     console.log('got messages successfully!', data);
+        //     win.webContents.send('getMessages', data);
+        // }).catch(error => {
+        //     console.log("error getting messages!");
+        // });
+
+
+        // let notifs = notificationService.processNotifications();
+        // win.webContents.send('getMessages', notifs);
+
+        apiService.getMessagesProcessed().then(notifs => {
+            win.webContents.send('getMessages', notifs);
+        })
+        //eventually, y'know, user ipcMain to send the messages back to the renderer
+    });
 }
 
 module.exports = createAppWindow;

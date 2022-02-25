@@ -31,18 +31,21 @@ function createAuthWindow() {
   };
 
   win.webContents.on('did-navigate', function (event, newUrl) {
+    //dA should have givne you the code by now, so get the code from the url after auth
+    //might need to do some error checking here, but any navigation in this auth window is checked if the code
+    //is there, so hoping it's good for right now
     let url = new URL(win.webContents.getURL());
     let urlParamsObj = new URLSearchParams(url.search);
     let code = urlParamsObj.get('code');
 
     if (code) {
-    authService.loadTokens('http://localhost:3000', code).then(() => {
-      createAppWindow();
-      destroyAuthWin();
-    }).catch(err => {
-      console.log('ERROR', err)
-    });
-  }
+      authService.loadTokens('http://localhost:3000', code).then(() => {
+        createAppWindow();
+        destroyAuthWin();
+      }).catch(err => {
+        console.log('ERROR', err)
+      });
+    }
 
   });
 

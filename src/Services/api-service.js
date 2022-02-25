@@ -3,24 +3,59 @@ const authService = require("./auth-service");
 
 const deviantartUrlBase = "https://www.deviantart.com/api/v1/oauth2";
 
-async function getMessages() {
+async function getMessages(dbCursor = null) {
     const params = `access_token=${authService.getAccessToken()}`;
+
+    if (dbCursor) {
+        params = params + `&cursor=${dbCursor}`;
+    }
 
     try {
         const response = await axios.post(`${deviantartUrlBase}/messages/feed`, params);
-
-        console.log("getting messages...", response);
-
         return response?.data;
+
     } catch (error) {
         console.log('error getting messages...', error);
-
         throw error;
     }
+}
+
+async function getMessagesProcessed() {
+    let params = `access_token=${authService.getAccessToken()}`;
+
+    let dbCursor = null;
+    let currentMessages = [];
+
+    //Test with 3 rounds first
+    for (let i = 0; i < 3; i++) {
+        try {
+            console.log('cursor BEFORE: ', dbCursor, params);
+            await axios.post(`${deviantartUrlBase}/messages/feed?${params}`).then(response => {
+                currentMessages.push(...response?.data?.results);
+                dbCursor = response?.data?.cursor;
+                if (dbCursor) {
+                    params = `access_token=${authService.getAccessToken()}&cursor=${dbCursor}`;
+                }
+    
+                console.log('cursor after: ', dbCursor, params, response?.data);
+            });
+            
+            
+    
+        } catch (error) {
+            console.log('error getting messages rounds...', error);
+            throw error;
+        }
+    }
+
+    return currentMessages;
+    
+
     
 }
 
 module.exports = {
-    getMessages
+    getMessages,
+    getMessagesProcessed
   };
 
