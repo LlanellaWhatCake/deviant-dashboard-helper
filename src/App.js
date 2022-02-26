@@ -9,13 +9,12 @@ import { StyleContext, StyleContextProvider } from "./Contexts/StyleContext";
 
 const rootElement = document.getElementById("root");
 const App = () => {
-  render(
+  return(
     <BrowserRouter>
         <StyleContextProvider>
           <MainDashboardContainer />
         </StyleContextProvider>
-    </BrowserRouter>,
-    rootElement
+    </BrowserRouter>
   );
 }
 

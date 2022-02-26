@@ -15,11 +15,13 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import FilterNoneIcon from '@mui/icons-material/FilterNone';
 import Container from '@mui/material/Container';
+import { useSelector } from 'react-redux';
 
 
 const DashboardFrontPage = () => {
 
     const [styleContext, setStyleContext] = useContext(StyleContext);
+    let allNotifications = useSelector(state => state.notifications);
 
     const style = {
         mainContainer: {
@@ -51,7 +53,8 @@ const DashboardFrontPage = () => {
             name: "Notifications",
             icon: <NotificationsIcon sx={{ fontSize: iconSize }} />,
             iconColor: "primary",
-            link: "/notifications"
+            link: "/notifications",
+            notifications: allNotifications.length
         },
         {
             name: "Deviants You Watch",
@@ -125,7 +128,7 @@ const DashboardFrontPage = () => {
             <Box sx={{ ...style.boxContainers}}>
             {myUpdates.map(option => {
                 return <Link to={option.link ? option.link : "/"} style={{ textDecoration: 'none' }}>
-                <DashboardCard title={option.name} icon={option.icon} iconColor={option.iconColor} />
+                <DashboardCard title={option.name} icon={option.icon} iconColor={option.iconColor} notifications={option.notifications}/>
                 </Link>
             })}
             </Box>

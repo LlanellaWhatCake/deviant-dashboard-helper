@@ -4,10 +4,13 @@ import AppHeader from "./AppHeader";
 import Sidebar from "./Sidebar";
 import PageContainer from "./PageContainer";
 import { StyleContext } from "../Contexts/StyleContext";
-import store from '../Redux/store/index';
+import { useDispatch, useSelector } from 'react-redux';
+import * as Actions from '../Redux/constants/action-types';
 
 
 const MainDashboardContainer = () => {
+  let state = useSelector(state => state);
+  let dispatch = useDispatch();
 
   //initially get the user's data at the start of the app, so messages, who they are logged in as, etc
   //eventually we'll do sorting on the messages after we get them, and then put them in the Redux store
@@ -19,10 +22,14 @@ const MainDashboardContainer = () => {
   useState(() => {
     window.api.send("getMessages");
     window.api.receive("getMessages", (messages) => {
-      console.log('got messages, here they are: ', messages, store);
-
+      console.log('got messages, here they are: ', messages, state);
+      dispatch({ type: Actions.SET_NOTIFICATIONS, payload: messages });
     })
   }, []);
+
+  useState(() => {
+    console.log("new store is: ", state);
+  }, [state]);
 
   const [styleContext, setStyleContext] = useContext(StyleContext);
 

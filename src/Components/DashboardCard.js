@@ -54,7 +54,7 @@ export const DashboardCard = ({ title, icon, notifications, iconColor }) =>
 
   return (
       <>
-      <DashboardBadge badgeContent={4} color="primary">
+      <DashboardBadge badgeContent={notifications} color="primary">
       <Card sx={{
           ...styles.card
       }}>

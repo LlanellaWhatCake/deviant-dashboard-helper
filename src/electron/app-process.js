@@ -21,7 +21,6 @@ function createAppWindow() {
 
 
     // and load the index.html of the app.
-    // win.loadFile("index.html");
     win.loadURL(
         isDev
             ? 'http://localhost:3000'
@@ -42,21 +41,9 @@ function createAppWindow() {
     });
 
     ipcMain.on("getMessages", (event, args) => {
-        // apiService.getMessages().then(data => {
-        //     console.log('got messages successfully!', data);
-        //     win.webContents.send('getMessages', data);
-        // }).catch(error => {
-        //     console.log("error getting messages!");
-        // });
-
-
-        // let notifs = notificationService.processNotifications();
-        // win.webContents.send('getMessages', notifs);
-
         apiService.getMessagesProcessed().then(notifs => {
             win.webContents.send('getMessages', notifs);
         })
-        //eventually, y'know, user ipcMain to send the messages back to the renderer
     });
 }
 

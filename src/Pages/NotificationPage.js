@@ -11,9 +11,14 @@ import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import NotificationMenuBar from '../Components/NotificationMenuBar';
 import { Notification } from '../Components/Notification';
+import { useDispatch, useSelector } from 'react-redux';
+import * as Actions from '../Redux/constants/action-types';
 
 
 const NotificationPage = () => {
+
+    let allNotifications = useSelector(state => state.notifications);
+    let dispatch = useDispatch();
 
     const firstTab = NOTIFICATION_TABS[0].index;
 
@@ -120,11 +125,12 @@ const NotificationPage = () => {
                             return <TabPanel index={tab?.index} value={currentTab}>
                                 Notifs for {tab?.name} section!
                                 {
-                                    testNotifs.map(notif => {
-                                        return <Notification 
-                                        username="testing"
-                                        notifSummary="testing commented on ABC"
-                                        notifDetails="This is a really cool thing.  I like the colors on ABC"
+                                    allNotifications.map(notification => {
+                                        return <Notification
+                                            username={notification?.originator?.username}
+                                            notifSummary={notification?.originator?.username + "did something"}
+                                            notifDetails={notification?.comment?.body || "No body yet"}
+                                            avatarSrc={notification?.originator?.usericon}
                                         />;
                                     })
                                 }
