@@ -18,8 +18,6 @@ export const Notification = (props) => {
   const [selected, setSelected] = useState(false); //change to whatever the props say later
   const [styleContext, setStyleContext] = useContext(StyleContext);
 
-  console.log('m source is', deviationSrc)
-
 
   const toggleCheckbox = checked => {
     setSelected(checked);
@@ -61,7 +59,6 @@ export const Notification = (props) => {
     },
     deviationPreview: {
       backgroundImage: `url(${deviationSrc})`,
-      // background: "purple",
       margin: "0 10px",
       width: "300px",
       height: "100px" 
