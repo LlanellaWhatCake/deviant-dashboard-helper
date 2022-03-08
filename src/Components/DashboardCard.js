@@ -31,7 +31,13 @@ export const DashboardCard = ({ title, icon, notifications, iconColor }) =>
         },
         icon: {
             fontSize: 100,
-            color: styleContext.theme.palette.primary.main
+            color: styleContext.theme.palette.primary.main,
+            display: "flex",
+            justifyContent: "center"
+        },
+        title: {
+            display: "flex",
+            justifyContent: "center"
         }
     }
 
@@ -65,7 +71,7 @@ export const DashboardCard = ({ title, icon, notifications, iconColor }) =>
           {icon}
               
           </CardContent>
-          <CardActions>
+          <CardActions sx={{ ...styles.title }}>
           {title}
       </CardActions>
 

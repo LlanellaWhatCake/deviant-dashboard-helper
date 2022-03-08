@@ -22,14 +22,9 @@ const MainDashboardContainer = () => {
   useState(() => {
     window.api.send("getMessages");
     window.api.receive("getMessages", (messages) => {
-      console.log('got messages, here they are: ', messages, state);
       dispatch({ type: Actions.SET_NOTIFICATIONS, payload: messages });
     })
   }, []);
-
-  useState(() => {
-    console.log("new store is: ", state);
-  }, [state]);
 
   const [styleContext, setStyleContext] = useContext(StyleContext);
 

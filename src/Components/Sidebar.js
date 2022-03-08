@@ -24,10 +24,6 @@ import {
 } from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 
-// const ipcRenderer = window.ipcRenderer;
-console.log('you heifer', window, window.api)
-// window.api.send("toMain", "some data");
-
 const Sidebar = () => {
 
     const [styleContext, setStyleContext] = useContext(StyleContext);

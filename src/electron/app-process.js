@@ -3,7 +3,6 @@ const { BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 const apiService = require('../Services/api-service');
 const authService = require('../Services/auth-service');
-const notificationService = require('../Services/notification-service');
 
 function createAppWindow() {
     // Create the browser window.

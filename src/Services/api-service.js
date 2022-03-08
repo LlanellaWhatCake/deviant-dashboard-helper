@@ -26,18 +26,18 @@ async function getMessagesProcessed() {
     let dbCursor = null;
     let currentMessages = [];
 
-    //Test with 3 rounds first
-    for (let i = 0; i < 3; i++) {
+    let testBatches = 3;
+
+    //Test with 3 rounds first so we don't overwhelm dA's api until we get a system down
+    for (let i = 0; i < testBatches; i++) {
         try {
-            console.log('cursor BEFORE: ', dbCursor, params);
             await axios.post(`${deviantartUrlBase}/messages/feed?${params}`).then(response => {
                 currentMessages.push(...response?.data?.results);
                 dbCursor = response?.data?.cursor;
                 if (dbCursor) {
                     params = `access_token=${authService.getAccessToken()}&cursor=${dbCursor}`;
                 }
-    
-                console.log('cursor after: ', dbCursor, params, response?.data);
+
             });
             
             

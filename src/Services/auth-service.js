@@ -48,7 +48,6 @@ function getRefreshDataString() {
 }
 
 async function refreshTokens() {
-  console.log('refreshing...', accessToken, refreshToken)
   const refreshToken = await keytar.getPassword(keytarService, keytarAccount);
   
 
@@ -64,7 +63,6 @@ async function refreshTokens() {
     }
   } else {
     console.log('OOPS! in refreshTokens')
-    console.log('No refresh tokens!')
     throw new Error("No available refresh token.");
   }
 }

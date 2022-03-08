@@ -24,10 +24,6 @@ const NotificationPage = () => {
 
     const [styleContext, setStyleContext] = useContext(StyleContext);
     const [currentTab, setCurrentTab] = useState(firstTab);
-    //test comment
-
-    const testNotifs = ["test", "hi", "testing", "oi", "lol", "test", "hi", "testing",
-        "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol", "test", "hi", "testing", "oi", "lol"];
 
     const style = {
         mainContainer: {
@@ -131,6 +127,7 @@ const NotificationPage = () => {
                                             notifSummary={notification?.originator?.username + "did something"}
                                             notifDetails={notification?.comment?.body || "No body yet"}
                                             avatarSrc={notification?.originator?.usericon}
+                                            deviationSrc={notification?.subject?.deviation?.thumbs[2]?.src}
                                         />;
                                     })
                                 }

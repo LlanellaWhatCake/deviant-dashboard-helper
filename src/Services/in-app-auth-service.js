@@ -3,7 +3,6 @@ import keytar from 'keytar';
 
 export const logoutUser = () => {
     keytar.findCredentials("electron-openid-oauth").then(credentials => {
-        console.log('the info: ', credentials);
         const token = credentials.password;
 
         Axios.post("https://www.deviantart.com/oauth2/revoke", { token: token }).then(response => {

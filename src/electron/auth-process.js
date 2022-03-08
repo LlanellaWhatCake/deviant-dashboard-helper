@@ -50,7 +50,6 @@ function createAuthWindow() {
   });
 
   webRequest.onBeforeRequest(filter, async ({ url }) => {
-    console.log('WEBREQUEST')
     await authService.loadTokens(url);
     createAppWindow();
     return destroyAuthWin();

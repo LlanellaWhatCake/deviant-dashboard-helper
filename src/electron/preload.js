@@ -5,7 +5,6 @@ const {
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
-console.log('what in the world')
 contextBridge.exposeInMainWorld(
     "api", {
         send: (channel, data) => {
